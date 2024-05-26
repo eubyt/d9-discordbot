@@ -4,9 +4,8 @@ import { CommandCreator, PingCommand } from './command';
 import { Config, DiscordBot } from './model';
 import { AutoVoiceChannel } from './event/AutoVoiceChannel';
 import { PrivateVoiceChannel } from './event/PrivateVoiceChannel';
-// import firebaseKey from '../config/firebase-admin.json';
-// import { ServiceAccount, cert, initializeApp } from 'firebase-admin/app';
-import { firestore } from 'firebase-admin';
+import { ServiceAccount, cert, initializeApp } from 'firebase-admin/app';
+import { credential, firestore } from 'firebase-admin';
 import { CanalPrivadoCommand } from './command/CanalPrivadoCommand';
 import { CanalPrivadoRenameCommand } from './command/CanalPrivadoRenameCommand';
 
@@ -16,12 +15,15 @@ import express from 'express';
 async function start(): Promise<void> {
     new Config(); //Loading Config
 
-    /// Firebase
-    // initializeApp({
-    //     credential: cert(firebaseKey as ServiceAccount),
-    // });
+    if (!process.env.FIREBASE_ADMIN) {
+        throw new Error('Firebase key admin invalid');
+    }
 
-    console.log(Config.getConfig('Config_Discord_BOT').id);
+    initializeApp({
+        credential: credential.cert(
+            JSON.parse(process.env.FIREBASE_ADMIN) as ServiceAccount,
+        ),
+    });
 
     const db = firestore();
 
