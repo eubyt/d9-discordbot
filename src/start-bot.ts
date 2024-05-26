@@ -4,7 +4,7 @@ import { CommandCreator, PingCommand } from './command';
 import { Config, DiscordBot } from './model';
 import { AutoVoiceChannel } from './event/AutoVoiceChannel';
 import { PrivateVoiceChannel } from './event/PrivateVoiceChannel';
-import { ServiceAccount, cert, initializeApp } from 'firebase-admin/app';
+import { ServiceAccount, initializeApp } from 'firebase-admin/app';
 import { credential, firestore } from 'firebase-admin';
 import { CanalPrivadoCommand } from './command/CanalPrivadoCommand';
 import { CanalPrivadoRenameCommand } from './command/CanalPrivadoRenameCommand';
