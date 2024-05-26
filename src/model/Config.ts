@@ -52,10 +52,12 @@ export class Config {
                 `../config/${this.NODE_ENV}.json`,
             ) as unknown as ConfigData;
 
-            configLoader.Config_Discord_BOT.id =
-                process.env.DISCORD_ID ?? 'invalid';
-            configLoader.Config_Discord_BOT.token =
-                process.env.DISCORD_TOKEN ?? 'invalid';
+            configLoader.Config_Discord_BOT = {
+                id: process.env.DISCORD_ID ?? 'invalid',
+                token: process.env.DISCORD_TOKEN ?? 'invalid',
+            };
+
+            process.env.DISCORD_TOKEN ?? 'invalid';
 
             Config.setConfig(configLoader);
         } catch (err) {

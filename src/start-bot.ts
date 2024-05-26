@@ -14,6 +14,8 @@ import http from 'http';
 import express from 'express';
 
 async function start(): Promise<void> {
+    new Config(); //Loading Config
+
     /// Firebase
     // initializeApp({
     //     credential: cert(firebaseKey as ServiceAccount),
@@ -24,8 +26,6 @@ async function start(): Promise<void> {
     const db = firestore();
 
     /// Discord bot \/
-
-    new Config(); //Loading Config
 
     // Criar os Eventos
     const commandHandle = new CommandHandle([
